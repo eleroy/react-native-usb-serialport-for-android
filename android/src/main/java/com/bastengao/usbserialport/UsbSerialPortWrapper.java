@@ -34,12 +34,18 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
         this.port.write(data, WRITE_WAIT_MILLIS);
     }
 
+    public byte[] read() throws IOException {
+        byte[] buffer = new byte[8192];
+        int len = this.port.read(buffer,READ_WAIT_MILLIS);
+        return Arrays.copyOf(buffer, len);
+    }
+
     public void onNewData(byte[] data) {
         WritableMap event = Arguments.createMap();
         String hex = new String(data);
         event.putInt("deviceId", this.deviceId);
         event.putString("data", hex);
-        Log.d("usbserialport", hex);
+        //Log.d("usbserialport", hex);
         sender.sendEvent(DataReceivedEvent, event);
     }
 
