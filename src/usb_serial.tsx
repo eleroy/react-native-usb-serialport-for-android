@@ -36,8 +36,8 @@ export default class UsbSerial {
     return UsbSerialportForAndroid.send(this.deviceId, hexStr);
   }
 
-  read():Promise<String>{
-    return UsbSerialportForAndroid.read(this.deviceId)
+  read(): Promise<String>{
+    return UsbSerialportForAndroid.read(this.deviceId);
   }
 
   onReceived(listener: Listener) {

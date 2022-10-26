@@ -38,6 +38,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
     public static final String CODE_OPEN_FAILED = "open_failed";
     public static final String CODE_DEVICE_NOT_OPEN = "device_not_open";
     public static final String CODE_SEND_FAILED = "send_failed";
+    public static final String CODE_READ_FAILED = "read_failed";
     public static final String CODE_DEVICE_NOT_OPEN_OR_CLOSED = "device_not_open_or_closed";
 
     private final ReactApplicationContext reactContext;
@@ -64,6 +65,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         constants.put("CODE_OPEN_FAILED", CODE_OPEN_FAILED);
         constants.put("CODE_DEVICE_NOT_OPEN", CODE_DEVICE_NOT_OPEN);
         constants.put("CODE_SEND_FAILED", CODE_SEND_FAILED);
+         constants.put("CODE_READ_FAILED", CODE_READ_FAILED);
         constants.put("CODE_DEVICE_NOT_OPEN_OR_CLOSED", CODE_DEVICE_NOT_OPEN_OR_CLOSED);
         return constants;
     }
@@ -209,7 +211,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
     }
-    
+
     @ReactMethod
     public void close(int deviceId, Promise promise) {
         UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
