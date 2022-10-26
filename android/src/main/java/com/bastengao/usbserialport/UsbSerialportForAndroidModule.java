@@ -105,7 +105,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
 
-        PendingIntent usbPermissionIntent = PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent usbPermissionIntent = PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         usbManager.requestPermission(device, usbPermissionIntent);
         promise.resolve(0);
     }
@@ -183,7 +183,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
 
-        byte[] data = hexStr.toBytes();
+        byte[] data = hexStr.getBytes();
         try {
             wrapper.send(data);
             promise.resolve(null);
@@ -193,6 +193,23 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         }
     }
 
+    @ReactMethod
+    public void read(int deviceId, Promise promise){
+        UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
+        if (wrapper == null) {
+            promise.reject(CODE_DEVICE_NOT_OPEN, "device not open");
+            return;
+        }
+
+        try {
+            byte[] data = wrapper.read();
+            promise.resolve(new String(data));
+        } catch (IOException e) {
+            promise.reject(CODE_READ_FAILED, "read failed", e);
+            return;
+        }
+    }
+    
     @ReactMethod
     public void close(int deviceId, Promise promise) {
         UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
