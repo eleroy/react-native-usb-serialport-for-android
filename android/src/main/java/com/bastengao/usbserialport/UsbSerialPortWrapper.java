@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
     private static final int WRITE_WAIT_MILLIS = 2000;
-    private static final int READ_WAIT_MILLIS = 2000;
+    private static final int READ_WAIT_MILLIS = 200;
     private static final String DataReceivedEvent = "usbSerialPortDataReceived";
 
     private int deviceId;
@@ -26,8 +26,9 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
         this.deviceId = deviceId;
         this.port = port;
         this.sender = sender;
-        this.ioManager = new SerialInputOutputManager(port, this);
-        ioManager.start();
+        this.ioManager = null;
+        //this.ioManager = new SerialInputOutputManager(port, this);
+        //ioManager.start();
     }
 
     public void send(byte[] data) throws IOException {
@@ -36,7 +37,7 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
 
     public byte[] read() throws IOException {
         byte[] buffer = new byte[8192];
-        int len = this.port.read(buffer,READ_WAIT_MILLIS);
+        int len = this.port.read(buffer, READ_WAIT_MILLIS);
         return Arrays.copyOf(buffer, len);
     }
 
