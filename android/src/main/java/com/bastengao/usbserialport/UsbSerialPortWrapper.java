@@ -36,7 +36,7 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
 
     public void onNewData(byte[] data) {
         WritableMap event = Arguments.createMap();
-        String hex = UsbSerialportForAndroidModule.bytesToHex(data);
+        String hex = new String(data);
         event.putInt("deviceId", this.deviceId);
         event.putString("data", hex);
         Log.d("usbserialport", hex);

@@ -81,7 +81,16 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         }
         promise.resolve(devices);
     }
+    // Required for rn built in EventEmitter Calls.
+    @ReactMethod
+    public void addListener(String eventName) {
 
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+
+    }
     @ReactMethod
     public void tryRequestPermission(int deviceId, Promise promise) {
         UsbManager usbManager = (UsbManager) getCurrentActivity().getSystemService(Context.USB_SERVICE);
@@ -96,7 +105,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
 
-        PendingIntent usbPermissionIntent = PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), 0);
+        PendingIntent usbPermissionIntent = PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_IMMUTABLE);
         usbManager.requestPermission(device, usbPermissionIntent);
         promise.resolve(0);
     }
@@ -174,7 +183,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
 
-        byte[] data = hexStringToByteArray(hexStr);
+        byte[] data = hexStr.toBytes();
         try {
             wrapper.send(data);
             promise.resolve(null);
