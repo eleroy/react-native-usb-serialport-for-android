@@ -26,9 +26,8 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
         this.deviceId = deviceId;
         this.port = port;
         this.sender = sender;
-        this.ioManager = null;
-        //this.ioManager = new SerialInputOutputManager(port, this);
-        //ioManager.start();
+        this.ioManager = new SerialInputOutputManager(port, this);
+        ioManager.start();
     }
 
     public void send(byte[] data) throws IOException {
