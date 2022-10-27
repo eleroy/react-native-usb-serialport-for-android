@@ -18,9 +18,14 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
+import com.hoho.android.usbserial.driver.CdcAcmSerialDriver;
+import com.hoho.android.usbserial.driver.FtdiSerialDriver;
+import com.hoho.android.usbserial.driver.ProbeTable;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -128,7 +133,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
     }
 
     @ReactMethod
-    public void open(int deviceId, int baudRate, int dataBits, int stopBits, int parity, boolean dtr, boolean rts, Promise promise) {
+    public void open(int deviceId, int baudRate, int dataBits, int stopBits, int parity, boolean dtr, boolean rts, int selectedDriver, Promise promise) {
         UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
         if (wrapper != null) {
             promise.resolve(deviceId);
@@ -141,8 +146,22 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             promise.reject(CODE_DEVICE_NOT_FOND, "device not found");
             return;
         }
-
-        UsbSerialDriver driver = UsbSerialProber.getDefaultProber().probeDevice(device);
+        int vendorId = device.getVendorId();
+        int productId = device.getProductId();
+        if(selectedDriver==0){
+            ProbeTable probeTable = UsbSerialProber.getDefaultProbeTable();
+        }else if (selectedDriver==1){
+            //CDC
+            ProbeTable probeTable = new ProbeTable();
+            probeTable.addProduct(vendorId, productId, CdcAcmSerialDriver.class);
+        }
+        else if (selectedDriver==2){
+            //FTDI
+            ProbeTable probeTable = new ProbeTable();
+            probeTable.addProduct(vendorId, productId, FtdiSerialDriver.class);
+        }                   
+        
+        UsbSerialDriver driver = (new UsbSerialProber(probeTable)).probeDevice(device);
         if (driver == null) {
             promise.reject(CODE_DRIVER_NOT_FOND, "no driver for device");
             return;
