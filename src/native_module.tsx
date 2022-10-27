@@ -13,6 +13,7 @@ export interface Device {
 }
 
 interface UsbSerialportForAndroidAPI {
+  isOpen(): boolean;
   list(): Promise<Device[]>;
   // return 1 if already has permission, 0 will request permission
   tryRequestPermission(deviceId: number): Promise<number>;

@@ -13,21 +13,25 @@ import java.util.Arrays;
 
 public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
     private static final int WRITE_WAIT_MILLIS = 2000;
-    private static final int READ_WAIT_MILLIS = 200;
+    private static final int READ_WAIT_MILLIS = 2000;
     private static final String DataReceivedEvent = "usbSerialPortDataReceived";
 
     private int deviceId;
     private UsbSerialPort port;
     private EventSender sender;
-    private boolean closed = false;
     private SerialInputOutputManager ioManager;
 
     UsbSerialPortWrapper(int deviceId, UsbSerialPort port, EventSender sender) {
         this.deviceId = deviceId;
         this.port = port;
         this.sender = sender;
+        //this.ioManager = null;
         this.ioManager = new SerialInputOutputManager(port, this);
         ioManager.start();
+    }
+
+    public boolean isOpen(){
+        return this.port.isOpen();
     }
 
     public void send(byte[] data) throws IOException {
@@ -54,7 +58,7 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
     }
 
     public void close() {
-        if (closed) {
+        if (! this.isOpen()) {
             return;
         }
 
@@ -63,7 +67,6 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
             ioManager.stop();
         }
 
-        this.closed = true;
         try {
             port.close();
         } catch (IOException e) {

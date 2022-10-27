@@ -71,6 +71,13 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
     }
 
     @ReactMethod
+    public boolean isOpen()
+    {
+        UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
+        return wrapper.isOpen();
+    }
+    
+    @ReactMethod
     public void list(Promise promise) {
         WritableArray devices = Arguments.createArray();
         UsbManager usbManager = (UsbManager) getCurrentActivity().getSystemService(Context.USB_SERVICE);
@@ -164,6 +171,8 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         try {
             port.open(connection);
             port.setParameters(baudRate, dataBits, stopBits, parity);
+            port.setDTR(true);
+            port.setRTS(true);
         } catch (IOException e) {
             try {
                  port.close();
