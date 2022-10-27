@@ -70,12 +70,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         return constants;
     }
 
-    @ReactMethod
-    public boolean isOpen()
-    {
-        UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
-        return wrapper.isOpen();
-    }
+    
     
     @ReactMethod
     public void list(Promise promise) {
@@ -186,6 +181,13 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         promise.resolve(deviceId);
     }
 
+    @ReactMethod
+    public boolean isOpen(int deviceId)
+    {
+        UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);
+        return wrapper.isOpen();
+    }
+    
     @ReactMethod
     public void send(int deviceId, String hexStr, Promise promise) {
         UsbSerialPortWrapper wrapper = usbSerialPorts.get(deviceId);

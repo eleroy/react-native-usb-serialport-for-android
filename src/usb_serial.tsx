@@ -41,9 +41,9 @@ export default class UsbSerial {
   }
 
   isOpen(): boolean{
-    return UsbSerialportForAndroid.isOpen()
+    return UsbSerialportForAndroid.isOpen(this.deviceId);
   }
-  
+
   onReceived(listener: Listener) {
     const listenerProxy = (event: EventData) => {
       
