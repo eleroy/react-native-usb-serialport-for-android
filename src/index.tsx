@@ -36,6 +36,8 @@ export interface OpenOptions {
   parity: Parity;
   dataBits: number;
   stopBits: number;
+  dtr:boolean;
+  rts:boolean;
 }
 
 export enum Parity {
@@ -96,7 +98,7 @@ const defaultManager: Manager = {
   },
 
   async open(deviceId: number, options: OpenOptions): Promise<UsbSerial> {
-    await UsbSerialportForAndroid.open(deviceId, options.baudRate, options.dataBits, options.stopBits, options.parity);
+    await UsbSerialportForAndroid.open(deviceId, options.baudRate, options.dataBits, options.stopBits, options.parity, options.dtr, options.rts);
     return new UsbSerial(deviceId, eventEmitter);
   }
 };
