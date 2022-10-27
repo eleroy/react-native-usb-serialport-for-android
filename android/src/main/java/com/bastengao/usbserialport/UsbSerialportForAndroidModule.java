@@ -148,16 +148,17 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         }
         int vendorId = device.getVendorId();
         int productId = device.getProductId();
+        ProbeTable probeTable = new ProbeTable();
         if(selectedDriver==0){
-            ProbeTable probeTable = UsbSerialProber.getDefaultProbeTable();
+            probeTable = UsbSerialProber.getDefaultProbeTable();
         }else if (selectedDriver==1){
             //CDC
-            ProbeTable probeTable = new ProbeTable();
+            probeTable = new ProbeTable();
             probeTable.addProduct(vendorId, productId, CdcAcmSerialDriver.class);
         }
         else if (selectedDriver==2){
             //FTDI
-            ProbeTable probeTable = new ProbeTable();
+            probeTable = new ProbeTable();
             probeTable.addProduct(vendorId, productId, FtdiSerialDriver.class);
         }                   
         
