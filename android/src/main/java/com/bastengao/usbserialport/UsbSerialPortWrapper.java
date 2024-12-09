@@ -40,7 +40,7 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
     }
 
     public byte[] read() throws IOException {
-        byte[] buffer = new byte[65536];
+        byte[] buffer = new byte[8192];
         int len = this.port.read(buffer, READ_WAIT_MILLIS);
         return Arrays.copyOf(buffer, len);
     }
