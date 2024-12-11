@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
     private static final int WRITE_WAIT_MILLIS = 2000;
-    private static final int READ_WAIT_MILLIS = 500;
+    private static final int READ_WAIT_MILLIS = 2000;
     private static final String DataReceivedEvent = "usbSerialPortDataReceived";
 
     private int deviceId;
@@ -27,7 +27,7 @@ public class UsbSerialPortWrapper implements SerialInputOutputManager.Listener {
         this.sender = sender;
         //this.ioManager = null;
         this.ioManager = new SerialInputOutputManager(port, this);
-        this.ioManager.setReadBufferSize(65536*2);
+        this.ioManager.setReadBufferSize(32768);
         ioManager.start();
     }
 
