@@ -19,10 +19,10 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 33)
+    compileSdkVersion safeExtGet('compileSdkVersion', 34)
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 16)
-        targetSdkVersion safeExtGet('targetSdkVersion', 33)
+        targetSdkVersion safeExtGet('targetSdkVersion', 34)
         versionCode 1
         versionName "1.0"
 
@@ -57,5 +57,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.github.mik3y:usb-serial-for-android:3.8.0"
+    implementation "com.github.mik3y:usb-serial-for-android:3.9.0"
 }

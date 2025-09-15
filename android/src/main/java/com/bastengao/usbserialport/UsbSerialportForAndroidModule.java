@@ -75,8 +75,8 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         return constants;
     }
 
-    
-    
+
+
     @ReactMethod
     public void list(Promise promise) {
         WritableArray devices = Arguments.createArray();
@@ -114,7 +114,7 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             return;
         }
 
-        PendingIntent usbPermissionIntent = PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent.getBroadcast(getCurrentActivity(), 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         usbManager.requestPermission(device, usbPermissionIntent);
         promise.resolve(0);
     }
@@ -160,8 +160,8 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
             //FTDI
             probeTable = new ProbeTable();
             probeTable.addProduct(vendorId, productId, FtdiSerialDriver.class);
-        }                   
-        
+        }
+
         UsbSerialDriver driver = (new UsbSerialProber(probeTable)).probeDevice(device);
         if (driver == null) {
             promise.reject(CODE_DRIVER_NOT_FOND, "no driver for device");
@@ -185,9 +185,9 @@ public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule im
         UsbSerialPort port = driver.getPorts().get(0);
         try {
             port.open(connection);
-            port.setParameters(baudRate, dataBits, stopBits, parity);           
-            port.setDTR(dtr);       
-            
+            port.setParameters(baudRate, dataBits, stopBits, parity);
+            port.setDTR(dtr);
+
             port.setRTS(rts);
         } catch (IOException e) {
             try {
