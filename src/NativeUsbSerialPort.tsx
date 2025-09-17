@@ -7,7 +7,7 @@ export interface Device {
   readonly productId: number;
 }
 
-export interface UsbSerialportForAndroidAPI extends TurboModule {
+export interface Spec extends TurboModule {
   isOpen(deviceId: number): boolean;
   list(): Promise<Device[]>;
   // return 1 if already has permission, 0 will request permission
@@ -26,8 +26,10 @@ export interface UsbSerialportForAndroidAPI extends TurboModule {
   send(deviceId: number, hexStr: string): Promise<null>;
   read(deviceId: number): Promise<String>;
   close(deviceId: number): Promise<null>;
+  addListener(eventName:string):Promise<null>;
+  removeListeners(count:number):Promise<null>;
 }
 
-export default TurboModuleRegistry.getEnforcing<UsbSerialportForAndroidAPI>(
+export default TurboModuleRegistry.getEnforcing<Spec>(
   'UsbSerialportForAndroid'
 );

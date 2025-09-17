@@ -1,5 +1,5 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
-import UsbSerialportForAndroid, { Device } from './native_module';
+import UsbSerialportForAndroid, { Device } from './NativeUsbSerialPort';
 import UsbSerial from './usb_serial';
 
 export { Device, UsbSerial };
