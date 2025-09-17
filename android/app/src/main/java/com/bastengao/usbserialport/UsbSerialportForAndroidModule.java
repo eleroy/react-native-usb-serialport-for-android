@@ -34,7 +34,7 @@ import java.util.Map;
 @ReactModule(name = UsbSerialportForAndroidModule.NAME)
 public class UsbSerialportForAndroidModule extends ReactContextBaseJavaModule implements EventSender {
     public static final String NAME = "UsbSerialportForAndroid";
-    private static final String INTENT_ACTION_GRANT_USB = BuildConfig.LIBRARY_PACKAGE_NAME + ".GRANT_USB";
+    private static final String INTENT_ACTION_GRANT_USB = BuildConfig.APPLICATION_ID + ".GRANT_USB";
 
     public static final String CODE_DEVICE_NOT_FOND = "device_not_found";
     public static final String CODE_DRIVER_NOT_FOND = "driver_not_found";

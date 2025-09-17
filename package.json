@@ -28,7 +28,7 @@
     "release": "release-it"
   },
   "codegenConfig": {
-    "name": "react-native-usb-serialport-for-android",
+    "name": "UsbSerialportForAndroid",
     "type": "all",
     "jsSrcsDir": "src",
     "android": {
