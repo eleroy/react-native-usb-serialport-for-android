@@ -28,8 +28,8 @@
     "release": "release-it"
   },
   "codegenConfig": {
-    "name": "UsbSerialportForAndroid",
-    "type": "modules",
+    "name": "react-native-usb-serialport-for-android",
+    "type": "all",
     "jsSrcsDir": "src",
     "android": {
       "javaPackageName": "com.bastengao.usbserialport"
