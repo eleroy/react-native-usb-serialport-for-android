@@ -1,19 +1,20 @@
-import type { NativeEventEmitter, EmitterSubscription } from 'react-native';
-import UsbSerialportForAndroid from 'react-native-usb-serialport-for-android/src/NativeUsbSerialPort';
+import type { NativeEventEmitter, EventSubscription } from 'react-native';
+import UsbSerialportForAndroid from './NativeUsbSerialPort';
 
 const DataReceivedEvent = 'usbSerialPortDataReceived';
 
 export interface EventData {
   deviceId: number;
   data: string;
+  [key: string]: any;
 }
 
 export type Listener = (data: EventData) => void;
 
 export default class UsbSerial {
   deviceId: number;
-  private NativeEventEmitter: NativeEventEmitter;
-  private listeners: EmitterSubscription[];
+  private NativeEventEmitter: NativeEventEmitter<EventData>;
+  private listeners: EventSubscription[];
 
   constructor(deviceId: number, NativeEventEmitter: NativeEventEmitter) {
     this.deviceId = deviceId;

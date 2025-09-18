@@ -2,21 +2,34 @@
   "name": "react-native-usb-serialport-for-android",
   "version": "0.4.1",
   "description": "react-native-usb-serialport-for-android",
-  "main": "lib/commonjs/index",
-  "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
-  "react-native": "src/index",
-  "source": "src/index",
+  "main": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.tsx",
+      "types": "./lib/typescript/src/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "src",
     "lib",
     "android",
+    "ios",
     "cpp",
-    "!lib/typescript/example",
+    "*.podspec",
+    "react-native.config.js",
+    "!ios/build",
     "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!**/.*"
   ],
   "scripts": {
     "android": "react-native run-android",
@@ -26,6 +39,7 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "prepare": "bob build",
+    "prepack": "bob build",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "release": "release-it"
   },
@@ -146,8 +160,12 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
-      "module",
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
       [
         "typescript",
         {

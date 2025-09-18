@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-turbo_library_test": ["./src/index"]
+      "react-native-usb-serialport-for-android": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
