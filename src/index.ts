@@ -1,10 +1,10 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import UsbSerialportForAndroid, { type Device } from './NativeUsbSerialPort';
-import UsbSerial from './usb_serial';
+import UsbSerial from './UsbSerial';
 
 export { UsbSerial };
 export type { Device };
-export type { Listener, EventData } from './usb_serial';
+export type { Listener, EventData } from './UsbSerial';
 
 const {
   CODE_DEVICE_NOT_FOND,

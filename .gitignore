@@ -28,7 +28,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-
+dist/
 # Android/IJ
 #
 .classpath

@@ -13,7 +13,7 @@ export type Listener = (data: EventData) => void;
 
 export default class UsbSerial {
   deviceId: number;
-  private NativeEventEmitter: NativeEventEmitter<EventData>;
+  private NativeEventEmitter: NativeEventEmitter;
   private listeners: EventSubscription[];
 
   constructor(deviceId: number, NativeEventEmitter: NativeEventEmitter) {
