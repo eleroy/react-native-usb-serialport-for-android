@@ -176,11 +176,5 @@
       ]
     ]
   },
-  "packageManager": "yarn@4.9.4",
-  "dependencies": {
-    "expo": "^55.0.7",
-    "package": "^1.0.1",
-    "react": "19.2.0",
-    "react-native": "0.83.2"
-  }
+  "packageManager": "yarn@4.9.4"
 }
