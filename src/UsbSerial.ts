@@ -1,5 +1,5 @@
 import type { NativeEventEmitter, EventSubscription } from 'react-native';
-import UsbSerialportForAndroid from './NativeUsbSerialPort';
+import UsbSerialportForAndroid from './NativeUsbSerialPort.js';
 
 const DataReceivedEvent = 'usbSerialPortDataReceived';
 

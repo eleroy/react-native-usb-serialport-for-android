@@ -1,16 +1,8 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-
+  "extends": "expo-module-scripts/tsconfig.base",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es2017",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "declaration": true
+    "outDir": "./build"
   },
-  "include": ["src/**/*"]
+  "include": ["./src"],
+  "exclude": ["**/__mocks__/*", "**/__tests__/*"]
 }

@@ -2,10 +2,8 @@
   "name": "react-native-usb-serialport-for-android",
   "version": "0.4.1",
   "description": "react-native-usb-serialport-for-android",
-  "main": "dist/cjs/index.js",
-  "types": "dist/esm/index.d.ts",
-  "module": "dist/esm/index.js",
-  "react-native": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
     "src",
     "lib",
@@ -28,7 +26,6 @@
   "scripts": {
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "start": "react-native start",
     "typescript": "tsc --noEmit",
     "prepack": "bob build",
@@ -37,10 +34,9 @@
     "clean:plugin": "expo-module clean plugin",
     "prepare": "npm run build",
     "prebuild": "npm run clean && npm run clean:plugin",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "build:esm": "tsc --outDir dist/esm",
-    "build": "npm run build:esm && npm run build:cjs",
+    "build": "expo-module build",
     "clean": "expo-module clean",
+    "lint": "expo-module lint",
     "test": "expo-module test",
     "prepublishOnly": "expo-module prepublishOnly"
   },
@@ -96,8 +92,9 @@
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
-    "react": "19.2.4",
-    "react-native": "0.84.1"
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
   },
   "jest": {
     "preset": "react-native",
@@ -157,24 +154,5 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      [
-        "module",
-        {
-          "esm": true
-        }
-      ],
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
-      ]
-    ]
-  },
-  "packageManager": "yarn@4.9.4"
+  }
 }
