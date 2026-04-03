@@ -16,6 +16,7 @@ export interface Spec extends TurboModule {
     addListener(eventName: string): Promise<null>;
     removeListeners(count: number): Promise<null>;
 }
-declare const _default: Spec;
-export default _default;
+declare const TurboModule: Spec | null;
+declare const UsbSerialportForAndroid: Spec;
+export default UsbSerialportForAndroid;
 //# sourceMappingURL=NativeUsbSerialPort.d.ts.map

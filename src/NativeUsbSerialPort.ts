@@ -1,5 +1,5 @@
 import type { TurboModule } from 'react-native';
-import { TurboModuleRegistry } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 
 export interface Device {
   readonly deviceId: number;
@@ -30,4 +30,13 @@ export interface Spec extends TurboModule {
   removeListeners(count: number): Promise<null>;
 }
 
-export default TurboModuleRegistry.get<Spec>('UsbSerialportForAndroid') as Spec;
+// Prefer the TurboModule implementation, but fall back to the legacy
+// NativeModules entry if TurboModuleRegistry doesn't return a module.
+const TurboModule = TurboModuleRegistry.get<Spec>(
+  'UsbSerialportForAndroid'
+) as Spec | null;
+
+const UsbSerialportForAndroid: Spec =
+  TurboModule ?? (NativeModules.UsbSerialportForAndroid as Spec);
+
+export default UsbSerialportForAndroid;
